@@ -17,4 +17,6 @@ int cvec_push(Cvec *v, const void* elem);
 void *cvec_get_index(Cvec *v, size_t index);
 #define cvec_at(type, vec, index) (*(type*)cvec_get_index(vec, index))
 void *cvec_begin(Cvec *v);
+const void *cvec_cbegin(Cvec *v);
 void *cvec_end(Cvec *v);
+const void* cvec_cend(Cvec *v);

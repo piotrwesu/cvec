@@ -38,7 +38,7 @@ int cvec_push(Cvec *v, const void* elem)
         }
         else{
             v->data = ptr;
-            v->capacity = v->capacity * CVEC_RESIZE_FACTOR;
+            v->capacity *= CVEC_RESIZE_FACTOR;
         }
     }
 
@@ -64,7 +64,17 @@ void *cvec_begin(Cvec *v)
     return (uint8_t*)v->data;
 };
 
+const void *cvec_cbegin(Cvec *v)
+{
+    return (const uint8_t*)v->data;
+};
+
 void *cvec_end(Cvec *v)
 {
     return (uint8_t*)v->data + v->size * v->stride;
 }
+
+const void* cvec_cend(Cvec *v)
+{
+    return (const void*)v->data + v->size * v->stride;
+};
