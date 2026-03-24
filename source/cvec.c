@@ -28,12 +28,12 @@ void cvec_free(Cvec *v)
     v->data = NULL;
 };
 
-int cvec_reserve(Cvec *v, size_t new_capacity)
+int cvec_reserve(Cvec *v, const size_t new_capacity)
 {
     if(new_capacity <= v->capacity)
         return 0;
 
-    void *ptr= realloc(v->data, new_capacity);
+    void *ptr= realloc(v->data, new_capacity * v->stride);
     if(ptr == NULL){
         fprintf(stderr, "Can't realloc memory for reserve in Cvec vector.");
         return -1;
