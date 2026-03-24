@@ -12,6 +12,8 @@ typedef struct Cvec {
 int cvec_init(Cvec *v, const size_t stride);
 void cvec_free(Cvec *v);
 
+int cvec_reserve(Cvec *v, size_t new_capacity);
+
 int cvec_push(Cvec *v, const void* elem);
 
 void *cvec_get_index(Cvec *v, size_t index);

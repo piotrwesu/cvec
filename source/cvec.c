@@ -28,6 +28,23 @@ void cvec_free(Cvec *v)
     v->data = NULL;
 };
 
+int cvec_reserve(Cvec *v, size_t new_capacity)
+{
+    if(new_capacity <= v->capacity)
+        return 0;
+
+    void *ptr= realloc(v->data, new_capacity);
+    if(ptr == NULL){
+        fprintf(stderr, "Can't realloc memory for reserve in Cvec vector.");
+        return -1;
+    }
+
+    v->data = ptr;
+    v->capacity = new_capacity;
+
+    return 0;
+};
+
 int cvec_push(Cvec *v, const void* elem)
 {
     if(v->size == v->capacity) {
