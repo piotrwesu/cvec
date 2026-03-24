@@ -24,6 +24,7 @@ int cvec_init(Cvec *v, const size_t stride)
 
 void cvec_free(Cvec *v)
 {
+    v->size = 0;
     free(v->data);
     v->data = NULL;
 };
