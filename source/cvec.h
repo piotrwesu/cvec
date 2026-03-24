@@ -2,19 +2,19 @@
 
 #include <stddef.h>
 
-typedef struct cvec {
+typedef struct Cvec {
     size_t size;
     size_t capacity;
     size_t stride;
     void *data;
-}cvec;
+}Cvec;
 
-int cvec_init(cvec *v, const size_t stride);
-void cvec_free(cvec *v);
+int cvec_init(Cvec *v, const size_t stride);
+void cvec_free(Cvec *v);
 
-int cvec_push(cvec *v, const void* elem);
+int cvec_push(Cvec *v, const void* elem);
 
-void *cvec_get_index(cvec *v, size_t index);
+void *cvec_get_index(Cvec *v, size_t index);
 #define cvec_at(type, vec, index) (*(type*)cvec_get_index(vec, index))
-void *cvec_begin(cvec *v);
-void *cvec_end(cvec *v);
+void *cvec_begin(Cvec *v);
+void *cvec_end(Cvec *v);

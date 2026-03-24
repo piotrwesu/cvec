@@ -3,7 +3,7 @@
 
 int main()
 {
-    cvec list;
+    Cvec list;
     cvec_init(&list, sizeof(int));
     
     int number = 0;
