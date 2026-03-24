@@ -15,6 +15,10 @@ int main()
 
     for(int i = 0; i < 10; i++)
         printf("Number: %d\n", cvec_at(int, &list, i));
+    
+
+    for(int *it = cvec_begin(&list); it != cvec_end(&list); it++)
+        printf("Number: %d\n", *it);
 
     cvec_free(&list);
 

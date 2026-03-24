@@ -57,3 +57,13 @@ void *cvec_get_index(cvec *v, size_t index)
 
     return (char*)v->data + index * v->stride;
 };
+
+void *cvec_begin(cvec *v)
+{
+    return (char*)v->data;
+};
+
+void *cvec_end(cvec *v)
+{
+    return (char*)v->data + v->size * v->stride;
+}
