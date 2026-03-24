@@ -22,3 +22,5 @@ void *cvec_begin(Cvec *v);
 const void *cvec_cbegin(Cvec *v);
 void *cvec_end(Cvec *v);
 const void* cvec_cend(Cvec *v);
+void *cvec_last_index(Cvec *v);
+#define cvec_back(type, vec) (*(type*)cvec_last_index(vec))

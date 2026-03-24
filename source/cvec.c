@@ -95,3 +95,11 @@ const void* cvec_cend(Cvec *v)
 {
     return (const void*)v->data + v->size * v->stride;
 };
+
+void *cvec_last_index(Cvec *v)
+{
+    if(v->size == 0)
+        return NULL;
+
+    return(uint8_t*)v->data + (v->size - 1) * v->stride;
+};
