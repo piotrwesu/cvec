@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h> 
 #include <string.h>
+#include <stdint.h>
 
 #define CVEC_DEFAULT_CAPACITY 3
 #define CVEC_RESIZE_FACTOR 3
@@ -41,7 +42,7 @@ int cvec_push(Cvec *v, const void* elem)
         }
     }
 
-    void *dest = (char*)v->data + v->size * v->stride;
+    void *dest = (uint8_t*)v->data + v->size * v->stride;
     memcpy(dest, elem, v->stride);
     v->size++;
 
@@ -55,15 +56,15 @@ void *cvec_get_index(Cvec *v, size_t index)
         return NULL;
     }
 
-    return (char*)v->data + index * v->stride;
+    return (uint8_t*)v->data + index * v->stride;
 };
 
 void *cvec_begin(Cvec *v)
 {
-    return (char*)v->data;
+    return (uint8_t*)v->data;
 };
 
 void *cvec_end(Cvec *v)
 {
-    return (char*)v->data + v->size * v->stride;
+    return (uint8_t*)v->data + v->size * v->stride;
 }
