@@ -8,10 +8,11 @@ int main()
     
     int number = 1;
 
-    cvec_push(&list, &number);
+    for(int i = 0; i < 10; i++)
+        cvec_push(&list, &number);
 
-    printf("Number: %d\n", *(int*)list.data); 
-    printf("Number: %d", cvec_at(int, &list, 0));
+    for(int i = 0; i < 10; i++)
+        printf("Number: %d", cvec_at(int, &list, i));
 
     cvec_free(&list);
 
