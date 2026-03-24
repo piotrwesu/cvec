@@ -30,7 +30,7 @@ void cvec_free(cvec *v)
 int cvec_push(cvec *v, const void* elem)
 {
     if(v->size == v->capacity) {
-        void *ptr = realloc(v->data, v->capacity * CVEC_RESIZE_FACTOR);    
+        void *ptr = realloc(v->data, v->capacity * v->stride * CVEC_RESIZE_FACTOR);    
         if(ptr == NULL){
             fprintf(stderr, "Can't realloc memory for pushing new element to cvec vector.\n");
             return -1;
@@ -41,9 +41,9 @@ int cvec_push(cvec *v, const void* elem)
         }
     }
 
-    void *dest = v->data + v->size * v->stride;
+    void *dest = (char*)v->data + v->size * v->stride;
     memcpy(dest, elem, v->stride);
-    v->size += 1;
+    v->size++;
 
     return 0;
 };
