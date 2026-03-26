@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdbool.h>
 
 typedef struct Cvec {
     size_t size;
@@ -29,3 +30,5 @@ void *cvec_last_index(Cvec *v);
 #define cvec_back(type, vec) (*(type*)cvec_last_index(vec))
 void *cvec_first_index(Cvec *v);
 #define cvec_front(type, vec) (*(type*)cvec_first_index(vec))
+
+bool cvec_empty(Cvec *v);

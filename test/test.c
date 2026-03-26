@@ -57,13 +57,21 @@ int clear()
 
     double value = 5;
 
-    for(int *it = cvec_begin(&tab); it != cvec_end(&tab); it++)
+    for(double i = 0; i < 10; i++)
         cvec_push(&tab, &value);
-    
-    cvec_clear(&tab);
+   
+    if(cvec_empty(&tab) == false){
+        printf("Vector is not empty.\n");
+        cvec_clear(&tab);
+    }
 
-    for(int *it = cvec_begin(&tab); it != cvec_end(&tab); it++)
+    for(double i = 0; i < 10; i++)
         cvec_push(&tab, &value);
+
+    for(double *i = cvec_begin(&tab); i != cvec_end(&tab); i++)
+        printf("Number: %lf ", *i);
+
+    cvec_free(&tab);
 
     return 0;
 }

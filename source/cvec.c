@@ -52,7 +52,8 @@ void cvec_clear(Cvec *v)
 {
     if(v->size > 0){
         free(v->data);
-        v->size = 0;
+        size_t stride = v->stride;
+        cvec_init(v, stride); 
     }
 };
 
@@ -122,4 +123,9 @@ void *cvec_first_index(Cvec *v)
         return NULL;
 
     return (uint8_t*)v->data;
+};
+
+bool cvec_empty(Cvec *v)
+{
+    return v->size == 0; 
 };
