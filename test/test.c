@@ -43,7 +43,27 @@ int reserve_test()
     printf("First value: %d\n", cvec_front(int, &tab));
     printf("Last value: %d\n",cvec_back(int, &tab));
 
+    cvec_clear(&tab);
+
     cvec_free(&tab);
+
+    return 0;
+}
+
+int clear()
+{
+    Cvec tab;
+    cvec_init(&tab, sizeof(double));
+
+    double value = 5;
+
+    for(int *it = cvec_begin(&tab); it != cvec_end(&tab); it++)
+        cvec_push(&tab, &value);
+    
+    cvec_clear(&tab);
+
+    for(int *it = cvec_begin(&tab); it != cvec_end(&tab); it++)
+        cvec_push(&tab, &value);
 
     return 0;
 }
@@ -52,6 +72,7 @@ int main()
 {
     loop_test();
     reserve_test();
+    clear();
 
     return 0;
 }

@@ -24,9 +24,11 @@ int cvec_init(Cvec *v, const size_t stride)
 
 void cvec_free(Cvec *v)
 {
-    v->size = 0;
-    free(v->data);
-    v->data = NULL;
+    if(v->size > 0){
+        v->size = 0;
+        free(v->data);
+        v->data = NULL;
+    }
 };
 
 int cvec_reserve(Cvec *v, const size_t new_capacity)
@@ -44,6 +46,14 @@ int cvec_reserve(Cvec *v, const size_t new_capacity)
     v->capacity = new_capacity;
 
     return 0;
+};
+
+void cvec_clear(Cvec *v)
+{
+    if(v->size > 0){
+        free(v->data);
+        v->size = 0;
+    }
 };
 
 int cvec_push(Cvec *v, const void* elem)
@@ -67,7 +77,7 @@ int cvec_push(Cvec *v, const void* elem)
     return 0;
 };
 
-void *cvec_get_index(Cvec *v, size_t index)
+void *cvec_get_index(Cvec *v, const size_t index)
 {
     if(index >= v->size){
         perror("Buffer overflow in index Cvec vector.\n");
