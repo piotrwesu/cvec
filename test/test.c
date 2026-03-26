@@ -40,7 +40,9 @@ int reserve_test()
     for(const int *it = cvec_cbegin(&tab); it != cvec_cend(&tab); it++)
         printf("Number: %d\n", *it);
 
-    printf("Last value: %d",cvec_back(int, &tab));
+    printf("First value: %d\n", cvec_front(int, &tab));
+    printf("Last value: %d\n",cvec_back(int, &tab));
+
     cvec_free(&tab);
 
     return 0;

@@ -102,5 +102,14 @@ void *cvec_last_index(Cvec *v)
     if(v->size == 0)
         return NULL;
 
-    return(uint8_t*)v->data + (v->size - 1) * v->stride;
+    return (uint8_t*)v->data + (v->size - 1) * v->stride;
+
+};
+
+void *cvec_first_index(Cvec *v)
+{
+    if(v->size == 0)
+        return NULL;
+
+    return (uint8_t*)v->data;
 };
