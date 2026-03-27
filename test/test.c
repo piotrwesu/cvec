@@ -9,7 +9,7 @@ int loop_test()
     int number = 0;
 
     for(int i = 0; i < 10; i++){
-        cvec_push(&list, &number);
+        cvec_push_back(&list, &number);
         number++;
     }
 
@@ -34,7 +34,7 @@ int reserve_test()
     cvec_reserve(&tab, n);
 
     for(int i = 0; i < n; i++)
-        cvec_push(&tab, &i);
+        cvec_push_back(&tab, &i);
 
 
     for(const int *it = cvec_cbegin(&tab); it != cvec_cend(&tab); it++)
@@ -58,7 +58,7 @@ int clear()
     double value = 5;
 
     for(double i = 0; i < 10; i++)
-        cvec_push(&tab, &value);
+        cvec_push_back(&tab, &value);
    
     if(cvec_empty(&tab) == false){
         printf("Vector is not empty.\n");
@@ -66,7 +66,7 @@ int clear()
     }
 
     for(double i = 0; i < 10; i++)
-        cvec_push(&tab, &value);
+        cvec_push_back(&tab, &value);
 
     for(double *i = cvec_begin(&tab); i != cvec_end(&tab); i++)
         printf("Number: %lf ", *i);

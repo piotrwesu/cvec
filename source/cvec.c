@@ -57,7 +57,7 @@ void cvec_clear(Cvec *v)
     }
 };
 
-int cvec_push(Cvec *v, const void* elem)
+int cvec_push_back(Cvec *v, const void* elem)
 {
     if(v->size == v->capacity) {
         void *ptr = realloc(v->data, v->capacity * v->stride * CVEC_RESIZE_FACTOR);    
