@@ -71,6 +71,8 @@ int clear()
     for(double *i = cvec_begin(&tab); i != cvec_end(&tab); i++)
         printf("Number: %lf ", *i);
 
+    cvec_pop_back(&tab);
+
     cvec_free(&tab);
 
     return 0;

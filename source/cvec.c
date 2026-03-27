@@ -78,6 +78,12 @@ int cvec_push(Cvec *v, const void* elem)
     return 0;
 };
 
+void cvec_pop_back(Cvec *v)
+{
+    if(v->size > 0)
+        v->size--;
+};
+
 void *cvec_get_index(Cvec *v, const size_t index)
 {
     if(index >= v->size){
