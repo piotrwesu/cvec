@@ -72,6 +72,9 @@ int clear()
         printf("Number: %lf ", *i);
 
     cvec_pop_back(&tab);
+    cvec_pop_back(&tab);
+
+    cvec_shrink_to_fit(&tab);
 
     cvec_free(&tab);
 

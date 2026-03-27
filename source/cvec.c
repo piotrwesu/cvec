@@ -48,6 +48,27 @@ int cvec_reserve(Cvec *v, const size_t new_capacity)
     return 0;
 };
 
+int cvec_shrink_to_fit(Cvec *v)
+{
+    if(v->capacity <= v->size * CVEC_RESIZE_FACTOR)
+        return 0;
+
+    if(v->capacity == 0){
+        cvec_clear(v);
+
+        return 0;
+    }
+
+    void *ptr = realloc(v->data, v->size * v->stride);
+    if(ptr == NULL)
+        return -1;
+    else{
+        v->data = ptr;
+        v->capacity = v->size;
+    }
+
+    return 0;
+}
 void cvec_clear(Cvec *v)
 {
     if(v->size > 0){
