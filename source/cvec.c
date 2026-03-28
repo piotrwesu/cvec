@@ -23,6 +23,7 @@ void cvec_free(Cvec *v)
 {
     if(v->data != NULL){
         v->size = 0;
+        v->capacity = 0;
         free(v->data);
         v->data = NULL;
     }
