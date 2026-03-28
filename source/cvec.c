@@ -14,10 +14,8 @@ int cvec_init(Cvec *v, const size_t stride)
     v->stride = stride;
     v->capacity = CVEC_DEFAULT_CAPACITY;
     v->data = (void*)calloc(v->capacity, v->stride);
-    if(v->data == NULL){
-        fprintf(stderr, "Can't allocate memory for Cvec vector.\n");
+    if(v->data == NULL)
         return -1;
-    }
 
     return 0;
 };
@@ -37,10 +35,8 @@ int cvec_reserve(Cvec *v, const size_t new_capacity)
         return 0;
 
     void *ptr= realloc(v->data, new_capacity * v->stride);
-    if(ptr == NULL){
-        fprintf(stderr, "Can't realloc memory for reserve in Cvec vector.");
+    if(ptr == NULL)
         return -1;
-    }
 
     v->data = ptr;
     v->capacity = new_capacity;
@@ -83,7 +79,6 @@ int cvec_push_back(Cvec *v, const void* elem)
     if(v->size == v->capacity) {
         void *ptr = realloc(v->data, v->capacity * v->stride * CVEC_RESIZE_FACTOR);    
         if(ptr == NULL){
-            fprintf(stderr, "Can't realloc memory for pushing new element to Cvec vector.\n");
             return -1;
         }
         else{
@@ -107,10 +102,8 @@ void cvec_pop_back(Cvec *v)
 
 void *cvec_get_index(Cvec *v, const size_t index)
 {
-    if(index >= v->size){
-        perror("Buffer overflow in index Cvec vector.\n");
+    if(index >= v->size)
         return NULL;
-    }
 
     return (uint8_t*)v->data + index * v->stride;
 };
