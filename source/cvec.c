@@ -86,11 +86,7 @@ int cvec_resize(Cvec *v, const size_t new_size)
 
 void cvec_clear(Cvec *v)
 {
-    if(v->size > 0){
-        free(v->data);
-        size_t stride = v->stride;
-        cvec_init(v, stride); 
-    }
+   v->size = 0; 
 };
 
 int cvec_push_back(Cvec *v, const void* elem)
