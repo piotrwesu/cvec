@@ -15,6 +15,7 @@ void cvec_free(Cvec *v);
 
 int cvec_reserve(Cvec *v, const size_t new_capacity);
 int cvec_shrink_to_fit(Cvec *v);
+int cvec_resize(Cvec *v, const size_t new_size);
 void cvec_clear(Cvec *v);
 
 int cvec_push_back(Cvec *v, const void* elem);

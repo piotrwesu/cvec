@@ -64,6 +64,26 @@ int cvec_shrink_to_fit(Cvec *v)
 
     return 0;
 }
+
+int cvec_resize(Cvec *v, const size_t new_size)
+{
+    if(new_size <= v->size)
+        v->size = new_size;
+    else {
+        void *ptr = realloc(v->data, new_size * v->stride * CVEC_RESIZE_FACTOR);    
+        if(ptr == NULL){
+            return -1;
+        }
+        else{
+            v->data = ptr;
+            v->capacity = new_size * CVEC_RESIZE_FACTOR;
+            v->size = new_size;
+        }
+    }
+
+    return 0;
+};
+
 void cvec_clear(Cvec *v)
 {
     if(v->size > 0){
