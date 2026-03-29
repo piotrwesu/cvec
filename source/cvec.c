@@ -110,6 +110,29 @@ int cvec_push_back(Cvec *v, const void* elem)
     return 0;
 };
 
+int cvec_insert(Cvec *v, const size_t index, const void *elem)
+{
+    if(index > v->size)
+        return -1;
+
+    if(v->size == v->capacity)
+        if(cvec_reserve(v, v->capacity * CVEC_RESIZE_FACTOR))
+            return -1;
+    
+    size_t moving_size = (v->size - index) * v->stride;
+    void *dest = (uint8_t*)v->data + index * v->stride; 
+
+    if(moving_size > 0){
+        memmove(dest + v->stride, dest, moving_size); 
+    }
+
+    memcpy(dest, elem, v->stride);
+
+    v->size++;
+
+    return 0;
+}
+
 void cvec_pop_back(Cvec *v)
 {
     if(v->size > 0)

@@ -43,7 +43,11 @@ int reserve_test()
     printf("First value: %d\n", cvec_front(int, &tab));
     printf("Last value: %d\n",cvec_back(int, &tab));
 
+    cvec_insert(&tab, 5, &n);
+    
     cvec_clear(&tab);
+
+    cvec_insert(&tab, 0, &n);
 
     cvec_free(&tab);
 

@@ -19,6 +19,7 @@ int cvec_resize(Cvec *v, const size_t new_size);
 void cvec_clear(Cvec *v);
 
 int cvec_push_back(Cvec *v, const void* elem);
+int cvec_insert(Cvec *v, const size_t index, const void *elem);
 void cvec_pop_back(Cvec *v);
 
 void *cvec_get_index(Cvec *v, const size_t index);
