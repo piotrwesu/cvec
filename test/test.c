@@ -44,10 +44,12 @@ int reserve_test()
     printf("Last value: %d\n",cvec_back(int, &tab));
 
     cvec_insert(&tab, 5, &n);
+    cvec_erase(&tab, 5);
     
     cvec_clear(&tab);
 
     cvec_insert(&tab, 0, &n);
+    cvec_erase(&tab, 0);
 
     cvec_free(&tab);
 

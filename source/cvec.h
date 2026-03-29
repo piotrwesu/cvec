@@ -21,6 +21,7 @@ void cvec_clear(Cvec *v);
 int cvec_push_back(Cvec *v, const void* elem);
 int cvec_insert(Cvec *v, const size_t index, const void *elem);
 void cvec_pop_back(Cvec *v);
+int cvec_erase(Cvec *v, const size_t index);
 
 void *cvec_get_index(Cvec *v, const size_t index);
 #define cvec_at(type, vec, index) (*(type*)cvec_get_index(vec, index))

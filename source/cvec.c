@@ -133,6 +133,20 @@ int cvec_insert(Cvec *v, const size_t index, const void *elem)
     return 0;
 }
 
+int cvec_erase(Cvec *v, const size_t index)
+{
+    if(index > v->size)
+        return -1;
+
+    void *dest = (uint8_t*)v->data + index * v->stride; 
+    size_t moving_size = (v->size - index - 1) * v->stride;
+    memmove(dest, dest + v->stride, moving_size);
+
+    v->size--;
+
+    return 0;
+};
+
 void cvec_pop_back(Cvec *v)
 {
     if(v->size > 0)
