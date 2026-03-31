@@ -1,5 +1,6 @@
 #include "cvec.h"
 #include <stdio.h>
+#include <time.h>
 
 int loop_test()
 {
@@ -89,9 +90,20 @@ int clear()
 
 int main()
 {
+    const long long N = 20000000LL;
+    struct timespec start, end;
+
+    clock_gettime(CLOCK_MONOTONIC, &start);
+
     loop_test();
     reserve_test();
     clear();
+
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double ns_time = ((end.tv_sec - start.tv_sec) * 1e9 +
+                         (end.tv_nsec - start.tv_nsec)) / (double)N;
+
+    printf("%.4f ns/op\n", ns_time);
 
     return 0;
 }
