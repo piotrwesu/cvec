@@ -161,6 +161,26 @@ void *cvec_get_index(Cvec *v, const size_t index)
     return (uint8_t*)v->data + index * v->stride;
 };
 
+size_t cvec_get_size(const Cvec *v)
+{
+    return v->size;
+};
+
+size_t cvec_get_capacity(const Cvec *v)
+{
+    return v->capacity;
+};
+
+void *cvec_data(Cvec *v)
+{
+    return (uint8_t*)v->data;
+};
+
+const void *cvec_cdata(const Cvec *v)
+{
+    return (const uint8_t*)v->data;
+};
+
 void *cvec_begin(Cvec *v)
 {
     return (uint8_t*)v->data;

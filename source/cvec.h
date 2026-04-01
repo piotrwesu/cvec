@@ -25,6 +25,10 @@ int cvec_erase(Cvec *v, const size_t index);
 
 void *cvec_get_index(Cvec *v, const size_t index);
 #define cvec_at(type, vec, index) (*(type*)cvec_get_index(vec, index))
+size_t cvec_get_size(const Cvec *v);
+size_t cvec_get_capacity(const Cvec *v);
+void *cvec_data(Cvec *v);
+const void *cvec_cdata(const Cvec *v);
 
 void *cvec_begin(Cvec *v);
 const void *cvec_cbegin(Cvec *v);
