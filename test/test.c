@@ -57,14 +57,14 @@ int reserve_test()
     return 0;
 }
 
-int clear()
+int clear_test()
 {
     Cvec tab;
     cvec_init(&tab, sizeof(double));
 
     double value = 5;
 
-    for(double i = 0; i < 10; i++)
+    for(int i = 0; i < 10; i++)
         cvec_push_back(&tab, &value);
    
     if(cvec_empty(&tab) == false){
@@ -72,7 +72,7 @@ int clear()
         cvec_clear(&tab);
     }
 
-    for(double i = 0; i < 10; i++)
+    for(int i = 0; i < 10; i++)
         cvec_push_back(&tab, &value);
 
     for(double *i = cvec_begin(&tab); i != cvec_end(&tab); i++)
@@ -90,20 +90,24 @@ int clear()
 
 int main()
 {
+#if defined(__unix__) || defined(__APPLE__)
     const long long N = 20000000LL;
     struct timespec start, end;
 
     clock_gettime(CLOCK_MONOTONIC, &start);
+#endif
 
     loop_test();
     reserve_test();
-    clear();
+    clear_test();
 
+#if defined(__unix__)|| defined(__APPLE__)
     clock_gettime(CLOCK_MONOTONIC, &end);
     double ns_time = ((end.tv_sec - start.tv_sec) * 1e9 +
                          (end.tv_nsec - start.tv_nsec)) / (double)N;
 
     printf("%.4f ns/op\n", ns_time);
+#endif
 
     return 0;
 }
