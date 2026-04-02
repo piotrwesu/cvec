@@ -10,7 +10,7 @@ typedef struct Cvec {
     void *data;
 }Cvec;
 
-int cvec_init(Cvec *v, size_t stride);
+int cvec_init(Cvec *v, size_t elem_size);
 void cvec_free(Cvec *v);
 
 int cvec_reserve(Cvec *v, size_t new_capacity);
@@ -25,8 +25,8 @@ int cvec_erase(Cvec *v, size_t index);
 
 void *cvec_get_index(Cvec *v, size_t index);
 #define cvec_at(type, vec, index) (*(type*)cvec_get_index(vec, index))
-size_t cvec_get_size(const Cvec *v);
-size_t cvec_get_capacity(const Cvec *v);
+size_t cvec_size(const Cvec *v);
+size_t cvec_capacity(const Cvec *v);
 void *cvec_data(Cvec *v);
 const void *cvec_cdata(const Cvec *v);
 

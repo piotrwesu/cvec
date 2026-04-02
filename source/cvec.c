@@ -7,10 +7,10 @@
 #define CVEC_DEFAULT_CAPACITY 3
 #define CVEC_RESIZE_FACTOR 3
 
-int cvec_init(Cvec *v, size_t stride)
+int cvec_init(Cvec *v, size_t elem_size)
 {
     v->size = 0;
-    v->stride = stride;
+    v->stride = elem_size;
     v->capacity = CVEC_DEFAULT_CAPACITY;
     v->data = (void*)calloc(v->capacity, v->stride);
     if(v->data == NULL)
@@ -161,12 +161,12 @@ void *cvec_get_index(Cvec *v, size_t index)
     return (uint8_t*)v->data + index * v->stride;
 };
 
-size_t cvec_get_size(const Cvec *v)
+size_t cvec_size(const Cvec *v)
 {
     return v->size;
 };
 
-size_t cvec_get_capacity(const Cvec *v)
+size_t cvec_capacity(const Cvec *v)
 {
     return v->capacity;
 };
