@@ -1,5 +1,4 @@
-set(SRC_FILES test.c
-                "${CMAKE_SOURCE_DIR}/source/cvec.c")
+set(SRC_FILES test.c)
 
 set(TESTPROJECT "cvec_test")
 add_executable(${TESTPROJECT} ${SRC_FILES})
