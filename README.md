@@ -36,6 +36,18 @@ int main()
 }
 ```
 
+```c
+Cvec text;
+cvec_init(&text, 64);
+const char line[64] = "Hello\0";
+
+cvec_push_back(&text, line);
+
+printf("%s", cvec_at_ptr(char, &text, 0));
+
+cvec_free(&text);
+```
+
 
 ## API
 
@@ -69,7 +81,10 @@ int   cvec_erase(Cvec *v, size_t index);
 ### Element access
 
 ```c
+void *cvec_get_index(Cvec *v, size_t index);
 (*(type*))  cvec_at(type, Cvec *v, size_t index);
+(type*)      cvec_at_ptr(type, vec, index)
+
 size_t      cvec_size(const Cvec *v);
 size_t      cvec_capacity(const Cvec *v);
 void        *cvec_data(Cvec *v);
