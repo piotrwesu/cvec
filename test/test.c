@@ -88,6 +88,24 @@ int clear_test()
     return 0;
 }
 
+bool string_test()
+{
+   Cvec text;
+    cvec_init(&text, 256);
+    const char line[256] = "VK_KHR_KHRONOS\0";
+    const char line2[256] = "VK_DRUGI_TEXT\0";
+    
+    cvec_push_back(&text, line);
+    cvec_push_back(&text, line2);
+
+    printf("%s\n", (char*)cvec_data(&text));
+    printf("%s\n", (char*)cvec_get_index(&text, 1));
+    printf("%s\n", cvec_at_ptr(char, &text, 1));
+    cvec_free(&text);
+
+    return 0;
+};
+
 int main()
 {
 #if defined(__unix__) || defined(__APPLE__)
@@ -100,6 +118,7 @@ int main()
     loop_test();
     reserve_test();
     clear_test();
+    string_test();
 
 #if defined(__unix__)|| defined(__APPLE__)
     clock_gettime(CLOCK_MONOTONIC, &end);
@@ -108,6 +127,6 @@ int main()
 
     printf("%.4f ns/op\n", ns_time);
 #endif
-
-    return 0;
+    
+     return 0;
 }
