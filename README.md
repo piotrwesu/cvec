@@ -36,19 +36,6 @@ int main()
 }
 ```
 
-```c
-Cvec text;
-cvec_init(&text, 64);
-const char line[64] = "Hello\0";
-
-cvec_push_back(&text, line);
-
-printf("%s", cvec_at_ptr(char, &text, 0));
-
-cvec_free(&text);
-```
-
-
 ## API
 
 ### Initialization

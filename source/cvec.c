@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #define CVEC_DEFAULT_CAPACITY 3
-#define CVEC_RESIZE_FACTOR 3
+#define CVEC_RESIZE_FACTOR 2
 
 int cvec_init(Cvec *v, size_t elem_size)
 {
@@ -46,11 +46,12 @@ int cvec_reserve(Cvec *v, size_t new_capacity)
 
 int cvec_shrink_to_fit(Cvec *v)
 {
-    if(v->capacity <= v->size * CVEC_RESIZE_FACTOR)
+    if(v->capacity == v->size)
         return 0;
 
-    if(v->capacity == 0){
-        cvec_clear(v);
+    if(v->size == 0) {
+        free(v->data);
+        v->data = NULL;
 
         return 0;
     }
@@ -103,7 +104,7 @@ int cvec_push_back(Cvec *v, const void* elem)
         }
     }
 
-    void *dest = (uint8_t*)v->data + v->size * v->stride;
+    unsigned char *dest = (unsigned char*)v->data + v->size * v->stride;
     memcpy(dest, elem, v->stride);
     v->size++;
 
@@ -120,7 +121,7 @@ int cvec_insert(Cvec *v, size_t index, const void *elem)
             return -1;
     
     size_t moving_size = (v->size - index) * v->stride;
-    void *dest = (uint8_t*)v->data + index * v->stride; 
+    unsigned char *dest = (unsigned char*)v->data + index * v->stride; 
 
     if(moving_size > 0){
         memmove(dest + v->stride, dest, moving_size); 
@@ -135,10 +136,10 @@ int cvec_insert(Cvec *v, size_t index, const void *elem)
 
 int cvec_erase(Cvec *v, size_t index)
 {
-    if(index > v->size)
+    if(index >= v->size)
         return -1;
 
-    void *dest = (uint8_t*)v->data + index * v->stride; 
+    unsigned char *dest = (unsigned char*)v->data + index * v->stride; 
     size_t moving_size = (v->size - index - 1) * v->stride;
     memmove(dest, dest + v->stride, moving_size);
 
@@ -158,7 +159,7 @@ void *cvec_get_index(Cvec *v, size_t index)
     if(index >= v->size)
         return NULL;
 
-    return (uint8_t*)v->data + index * v->stride;
+    return (unsigned char*)v->data + index * v->stride;
 };
 
 size_t cvec_size(const Cvec *v)
@@ -173,27 +174,27 @@ size_t cvec_capacity(const Cvec *v)
 
 void *cvec_data(Cvec *v)
 {
-    return (uint8_t*)v->data;
+    return (unsigned char*)v->data;
 };
 
 const void *cvec_cdata(const Cvec *v)
 {
-    return (const uint8_t*)v->data;
+    return (const unsigned char*)v->data;
 };
 
 void *cvec_begin(Cvec *v)
 {
-    return (uint8_t*)v->data;
+    return (unsigned char*)v->data;
 };
 
 const void *cvec_cbegin(const Cvec *v)
 {
-    return (const uint8_t*)v->data;
+    return (const unsigned char*)v->data;
 };
 
 void *cvec_end(Cvec *v)
 {
-    return (uint8_t*)v->data + v->size * v->stride;
+    return (unsigned char*)v->data + v->size * v->stride;
 }
 
 const void* cvec_cend(const Cvec *v)
@@ -206,7 +207,7 @@ void *cvec_last_index(Cvec *v)
     if(v->size == 0)
         return NULL;
 
-    return (uint8_t*)v->data + (v->size - 1) * v->stride;
+    return (unsigned char*)v->data + (v->size - 1) * v->stride;
 
 };
 
@@ -215,7 +216,7 @@ void *cvec_first_index(Cvec *v)
     if(v->size == 0)
         return NULL;
 
-    return (uint8_t*)v->data;
+    return (unsigned char*)v->data;
 };
 
 bool cvec_empty(const Cvec *v)
